@@ -56,7 +56,7 @@ public class Board {
 	}
 	
 	public MoveStatus checkMove(int x, int y, int value) {
-		if(x < 0 || x > 8 || y < 0 || y > 8 || value < 1 || value > 9) {
+		if(x < 0 || x > 8 || y < 0 || y > 8 || value < 1 || value > 9 || board[x][y] != 0) {
 			return MoveStatus.INVALID;
 		}
 		
