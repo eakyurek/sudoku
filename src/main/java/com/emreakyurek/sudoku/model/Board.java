@@ -27,6 +27,13 @@ public class Board {
 			squares.add(square);
 		}
 	}
+
+	public Board(String board) {
+		this();
+		for(int i = 0; i < board.length(); i++) {
+			makeMove(i%9, i/9, Character.getNumericValue(board.charAt(i)));
+		}
+	}
 	
 	public MoveStatus makeMove(int x, int y, int value) {
 		MoveStatus status = checkMove(x, y, value);
@@ -49,6 +56,10 @@ public class Board {
 	}
 	
 	public MoveStatus checkMove(int x, int y, int value) {
+		if(x < 0 || x > 8 || y < 0 || y > 8 || value < 1 || value > 9) {
+			return MoveStatus.INVALID;
+		}
+		
 		if(rows.get(y).contains(value)) {
 			return MoveStatus.INVALID;
 		} else if(columns.get(x).contains(value)) {
@@ -68,5 +79,21 @@ public class Board {
 		int row = y / 3;
 		int column = x / 3;
 		return row * 3 + column;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+	
+	public int getMovesMade() {
+		return movesMade;
+	}
+
+	public void setMovesMade(int movesMade) {
+		this.movesMade = movesMade;
 	}
 }
