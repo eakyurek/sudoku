@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String getNewBoard() {
-        return "New Board";
+		int deneme = (3/3);
+        return "New Board " + deneme;
     }
 	
 	@RequestMapping(value = "/{boardId}/", method = RequestMethod.GET)
