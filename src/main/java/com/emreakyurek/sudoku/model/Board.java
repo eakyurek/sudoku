@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Board {
-	private ArrayList<HashSet<Integer>> rows;
-	private ArrayList<HashSet<Integer>> columns;
-	private ArrayList<HashSet<Integer>> squares;
+	private int id;
 	private int[][] board;
 	private boolean completed;
 	private int movesMade;
+	
+	private ArrayList<HashSet<Integer>> rows;
+	private ArrayList<HashSet<Integer>> columns;
+	private ArrayList<HashSet<Integer>> squares;
 	
 	public Board() {
 		rows = new ArrayList<HashSet<Integer>>(9);
@@ -45,7 +47,7 @@ public class Board {
 				rows.get(y).add(value);
 				columns.get(x).add(value);
 				squares.get(findSquare(x, y)).add(value);
-				board[x][y] = value;
+				board[y][x] = value;
 				movesMade++;
 				break;
 			case INVALID:
@@ -54,9 +56,9 @@ public class Board {
 		
 		return status;
 	}
-	
+
 	public MoveStatus checkMove(int x, int y, int value) {
-		if(x < 0 || x > 8 || y < 0 || y > 8 || value < 1 || value > 9 || board[x][y] != 0) {
+		if(x < 0 || x > 8 || y < 0 || y > 8 || value < 1 || value > 9 || board[y][x] != 0) {
 			return MoveStatus.INVALID;
 		}
 		
@@ -80,6 +82,14 @@ public class Board {
 		int column = x / 3;
 		return row * 3 + column;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public boolean isCompleted() {
 		return completed;
@@ -95,5 +105,24 @@ public class Board {
 
 	public void setMovesMade(int movesMade) {
 		this.movesMade = movesMade;
+	}
+	
+	public int[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(int[][] board) {
+		this.board = board;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder(81);
+		for(int i = 0; i < 9; i++) {
+			for(int j = 0; j < 9; j++) {
+				builder.append(board[i][j]);
+			}
+		}
+		return builder.toString();
 	}
 }
