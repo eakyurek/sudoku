@@ -30,6 +30,14 @@ public class BoardTest {
 	}
 	
 	@Test
+	public void makeComletingMove() {
+		String boardStr = "391286574487359126652714839875431692213967485964528713149673258538142967726895340";
+		board = new Board(boardStr);
+		MoveStatus result = board.makeMove(8, 8, 1);
+		Assert.assertEquals(MoveStatus.COMPLETED, result);
+	}
+	
+	@Test
 	public void makeInvalidMove_BigValue() {
 		MoveStatus result = board.makeMove(0, 1, 10);
 		Assert.assertEquals(MoveStatus.INVALID, result);
